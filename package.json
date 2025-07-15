@@ -1,0 +1,21 @@
+{
+  "name": "echo-backend",
+  "module": "index.js",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@graphql-tools/schema": "^10.0.0",
+    "apollo-server-express": "^3.13.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.0",
+    "graphql": "^16.11.0",
+    "graphql-subscriptions": "^3.0.0",
+    "graphql-ws": "^5.16.0",
+    "mongoose": "^8.16.3",
+    "ws": "^8.18.3"
+  }
+}
