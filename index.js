@@ -14,6 +14,13 @@ const resolvers = require('./schema/resolvers');
   await connectDB();
 
   const app = express();
+  
+  // Trust proxy to get real IP addresses
+  app.set('trust proxy', true);
+  
+  // Increase payload limits for base64 images
+  app.use(express.json({ limit: '10mb' }));
+  app.use(express.urlencoded({ limit: '10mb', extended: true }));
   app.use(cors());
 
   const httpServer = http.createServer(app);
@@ -28,7 +35,9 @@ const resolvers = require('./schema/resolvers');
 
   const server = new ApolloServer({
     schema,
-    // context: ({ req }) => ({ req }),
+    context: ({ req }) => ({
+      req
+    }),
   });
 
   await server.start();
@@ -36,6 +45,6 @@ const resolvers = require('./schema/resolvers');
 
   const PORT = process.env.PORT || 4000;
   httpServer.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}${server.graphqlPath}`);
+    console.log(`Server running on http://localhost:${PORT}${server.graphqlPath}`);
   });
 })();
